@@ -26,7 +26,7 @@ const CustomRoutes = () => {
         }
       />
       <Route path="/" element={<DashboardWrapper />}>
-        <Route path="/" element={<Main />} />
+        <Route index  element={<Main />} />
         <Route path="/products" element={<Products />} />
         <Route path="/brands" element={<Brands />} />
         <Route path="/categories" element={<Categories />} />
@@ -36,3 +36,4 @@ const CustomRoutes = () => {
 };
 
 export default CustomRoutes;
+
