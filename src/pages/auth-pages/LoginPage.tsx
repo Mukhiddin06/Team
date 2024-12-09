@@ -23,8 +23,6 @@ const LoginPage = () => {
       {
         onSuccess: (data) => {
           toast.success(data.message);
-          console.log(data);
-
           localStorage.setItem("access_token", data.data.tokens.access_token);
           localStorage.setItem("user_info", JSON.stringify(data.data.data));
           navigate("/");
