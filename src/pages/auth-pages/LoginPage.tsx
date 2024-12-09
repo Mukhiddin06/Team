@@ -15,7 +15,7 @@ const LoginPage = () => {
   const handleSubmit = (values: LoginType) => {
     const phone = values.phone_number
       .split("")
-      .filter((item) => item !== "")
+      .filter((item) => item !== " ")
       .join("");
     mutate(
       { ...values, phone_number: phone },
