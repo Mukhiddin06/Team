@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { LoginPage, RegisterPage } from "../pages";
 
-import { ProtectedAuth } from "../components";
+import { ProtectedAuth } from "../components/protect-route";
 import DashboardWrapper from "../pages/Dashboard/DashboardWrapper";
 import { Brands, Categories, Main, Products } from "../pages/Dashboard";
 
@@ -26,7 +26,7 @@ const CustomRoutes = () => {
         }
       />
       <Route path="/" element={<DashboardWrapper />}>
-        <Route path="/" element={<Main />} />
+        <Route index  element={<Main />} />
         <Route path="/products" element={<Products />} />
         <Route path="/brands" element={<Brands />} />
         <Route path="/categories" element={<Categories />} />
@@ -36,3 +36,4 @@ const CustomRoutes = () => {
 };
 
 export default CustomRoutes;
+
