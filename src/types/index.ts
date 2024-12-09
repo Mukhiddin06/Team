@@ -37,4 +37,8 @@ export interface ProductType {
   name: string;
   price?: string;
   rate?: number | null;
+=======
+export interface CategoryTypes {
+  id?: number;
+  name?: string;
 }
