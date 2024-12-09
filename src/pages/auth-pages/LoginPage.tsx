@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useLoginMutation } from "../../hooks/useAuth";
 import { MaskedInput } from "antd-mask-input";
 import { LoginType } from "../../types";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 
 const LoginPage = () => {
@@ -17,13 +17,15 @@ const LoginPage = () => {
       .split("")
       .filter((item) => item !== " ")
       .join("");
-      console.log(phone);
-      
+
     mutate(
       { ...values, phone_number: phone },
       {
-        onSuccess: () => {
-          navigate("/", { replace: true });
+        onSuccess: (data) => {
+          toast.success(data.message);
+          localStorage.setItem("access_token", data.data.tokens.access_token);
+          localStorage.setItem("user_info", JSON.stringify(data.data.data));
+          navigate("/");
         },
         onError: () => {
           toast.error("Failed to login. Please try again.");
@@ -119,6 +121,9 @@ const LoginPage = () => {
             </Button>
           </Form.Item>
         </Form>
+        <Link className="text-white text-end block" to={"/register"}>
+          Don't have an account ?
+        </Link>
       </div>
     </div>
   );
