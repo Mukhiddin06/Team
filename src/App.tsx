@@ -3,7 +3,7 @@ import CustomRoutes from "./routes";
 const App = () => {
   return (
     <>
-      <CustomRoutes/>
+      <CustomRoutes />
     </>
   );
 };
