@@ -5,5 +5,5 @@ export const getProducts =  async (params?:ParamsType) => {
     const res = await useAxios().get('/products/search',{
         params: params
     });
-    return res.data;
+    return res.data.data;
 };

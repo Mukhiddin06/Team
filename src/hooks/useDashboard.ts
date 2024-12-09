@@ -4,8 +4,8 @@ import { ParamsType } from "../types"
 
 
 export const useGetProductsQuery = (params?:ParamsType) => {
-    return useQuery<ParamsType | Error>({
-        queryKey: ['products'],
+    return useQuery({
+        queryKey: ['products', params],
         queryFn: () =>  getProducts(params)
     })
 }
