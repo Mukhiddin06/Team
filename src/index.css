@@ -11,3 +11,21 @@
 .ant-form-item-required{
   color: white !important;
 }
+.ant-col  label{
+  color: white !important;
+}
+.ant-input{
+  background: transparent !important;
+  color: white !important;
+}
+.ant-input::placeholder{
+  color: white !important;
+}
+
+.ant-input-affix-wrapper{
+  background: transparent !important;
+}
+
+.ant-input-suffix{
+  color: white !important;
+}
