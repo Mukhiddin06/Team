@@ -4,7 +4,7 @@ import { MaskedInput } from 'antd-mask-input';
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 import toast, { Toaster } from 'react-hot-toast';
 import { SignupType } from '../../types';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useRegisterMutation } from '../../hooks/useAuth';
 
 
@@ -57,13 +57,13 @@ const RegisterPage: React.FC = () => {
           form={form}
           onFinish={handleSubmitRegister}
         >
-          <Form.Item 
+          <Form.Item
             label="First Name"
             name="first_name"
             rules={[{ required: true, message: "Enter First Name" }]}>
             <Input placeholder="Enter First Name" />
           </Form.Item>
-          <Form.Item 
+          <Form.Item
             label="Last Name"
             name="last_name"
             rules={[{ required: true, message: "Enter Last Name" }]}>
@@ -85,7 +85,7 @@ const RegisterPage: React.FC = () => {
               placeholder="+998 xx xxx xx xx"
             />
           </Form.Item>
-          <Form.Item 
+          <Form.Item
             label="Email"
             name="email"
             rules={[{ required: true, message: "Enter Email" }]}>
@@ -124,11 +124,12 @@ const RegisterPage: React.FC = () => {
               className="btn"
               htmlType="submit"
               loading={isPending}
-              >
+            >
               Submit
             </Button>
           </Form.Item>
         </Form>
+        <Link to={"/login"} className="block text-white text-end">Have an Account ?</Link>
       </div>
     </div>
   )
