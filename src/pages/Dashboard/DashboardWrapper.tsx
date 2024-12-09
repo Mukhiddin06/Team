@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AppstoreOutlined,
   BarChartOutlined,
@@ -6,17 +6,23 @@ import {
   MenuUnfoldOutlined,
   ShopOutlined,
   TagsOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
 } from "@ant-design/icons";
+import { UserDataTypes } from "../../types";
 import { Button, Layout, Menu, theme } from "antd";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
-const { Header, Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
 const DashboardWrapper: React.FC = () => {
+  const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
+  const [userData, setUserData] = useState<UserDataTypes>({});
+  const userInfo: string | null = localStorage.getItem("user_info");
+  useEffect(() => {
+    if (userInfo) {
+      setUserData(JSON.parse(userInfo));
+    }
+  }, [userInfo]);
 
   const navigate = useNavigate();
   const navbarlist = [
@@ -45,16 +51,29 @@ const DashboardWrapper: React.FC = () => {
       path: "/brands",
     },
   ];
+
+  const [currentPath, setCurrentPath] = useState("1");
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  const handlePath = (id: number) => {
-    const path = navbarlist.find((item) => Number(item.key) === id);
+  const handlePath = (id: string) => {
+    const path = navbarlist.find((item) => item.key === id);
     if (path) {
+      setCurrentPath(path.key);
       navigate(path.path);
     }
   };
+
+  useEffect(() => {
+    if (location.pathname === "/profile") {
+      setCurrentPath("0");
+    }
+    const activeNavItem = navbarlist.find(
+      (item) => location.pathname == item.path
+    );
+    if (activeNavItem) setCurrentPath(activeNavItem.key);
+  }, [location.pathname]);
 
   return (
     <Layout className="w-full min-h-screen">
@@ -62,34 +81,58 @@ const DashboardWrapper: React.FC = () => {
         <div className="demo-logo-vertical" />
         <div className="w-full py-[20px] flex items-center justify-center">
           {!collapsed ? (
-            <span className="text-[40px] text-center text-white">Texnoark</span>
+            <span
+              className="text-[40px] text-center text-white duration-200 cursor-pointer"
+              onClick={() => navigate("/")}
+            >
+              Texnoark
+            </span>
           ) : (
-            <span className="text-[40px] text-center text-white">T</span>
+            <span
+              className="text-[40px] text-center text-white duration-200 cursor-pointer"
+              onClick={() => navigate("/")}
+            >
+              T
+            </span>
           )}
         </div>
         <Menu
           theme="dark"
           mode="inline"
           defaultSelectedKeys={["1"]}
+          selectedKeys={[currentPath]}
           onClick={(e) => {
-            handlePath(Number(e.key));
+            handlePath(e.key);
           }}
           items={navbarlist}
         />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }}>
+        <div
+          style={{
+            padding: 20,
+            background: colorBgContainer,
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
           <Button
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             onClick={() => setCollapsed(!collapsed)}
             style={{
               fontSize: "16px",
-              width: 64,
-              height: 64,
+              padding: "20px",
             }}
           />
-        </Header>
+          <button
+            className="bg-gray-200 py-2 px-6 rounded capitalize hover:bg-gray-300"
+            onClick={() => navigate("/profile")}
+          >
+            {userData.first_name}
+          </button>
+        </div>
         <Content
           style={{
             margin: "24px 16px",
