@@ -8,3 +8,9 @@ export interface SignupType extends LoginType  {
     last_name: string;
     email: string;
 }
+
+export interface ParamsType {
+    search: string;
+    limit: number;
+    page: number;
+}
