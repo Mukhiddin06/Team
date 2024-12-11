@@ -1,5 +1,16 @@
+import BrandTable from "../../components/BrandTable";
+
+
+
 const Brands = () => {
-  return <div>Brands</div>;
+
+
+
+  return(
+    <div>
+      <BrandTable/>
+    </div>
+  )
 };
 
 export default Brands;

@@ -7,3 +7,10 @@ export const getProducts =  async (params?:ParamsType) => {
     });
     return res.data;
 };
+
+export const getBrand = async (params?:ParamsType) => {
+    const res = await useAxios().get('/brand/search', {
+        params:params
+    });
+    return res.data.data.brands
+}
