@@ -10,7 +10,7 @@ export interface SignupType extends LoginType {
 }
 
 export interface ParamsType {
-  search: string;
+  search?: string;
   limit: number;
   page: number;
 }
@@ -28,6 +28,13 @@ export interface UserDataTypes {
   phone_number?: number;
 }
 
+export interface BrandsType {
+  category_id?: number
+  description?: string
+  id?: number
+  image: string
+  name: string
+}
 export interface ProductType {
   brand_id?: number;
   createdAt?: string;
@@ -37,7 +44,7 @@ export interface ProductType {
   name: string;
   price?: string;
   rate?: number | null;
-=======
+}
 export interface CategoryTypes {
   id?: number;
   name?: string;
