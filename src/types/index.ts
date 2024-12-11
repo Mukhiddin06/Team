@@ -35,3 +35,17 @@ export interface BrandsType {
   image: string
   name: string
 }
+export interface ProductType {
+  brand_id?: number;
+  createdAt?: string;
+  id: number;
+  images?: string[];
+  lastUpdatedAt?: string;
+  name: string;
+  price?: string;
+  rate?: number | null;
+}
+export interface CategoryTypes {
+  id?: number;
+  name?: string;
+}
