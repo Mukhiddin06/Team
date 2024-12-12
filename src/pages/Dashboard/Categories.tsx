@@ -6,15 +6,15 @@ import { useEffect, useState } from "react";
 
 const Categories = () => {
   const [categoriesData, setCategoriesData] = useState<CategoryTypes[]>([]);
-  const { data: categories = [], isLoading, isError } = useGetCategoriesQuery();
+  const { data: categories = [], isPending, isError } = useGetCategoriesQuery();
 
   useEffect(() => {
     if (categories) setCategoriesData(categories?.data?.categories);
-  }, [categories]);
+  }, [isPending]);
 
   return (
     <div className="w-[30%] bg-gray-200 h-full rounded">
-      {isLoading ? (
+      {isPending ? (
         <LoadingOutlined />
       ) : isError ? (
         <p>Error...</p>
