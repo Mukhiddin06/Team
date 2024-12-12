@@ -8,24 +8,30 @@
   box-sizing: border-box;
 }
 
-.ant-form-item-required{
+.loginPage .ant-form-item-required,
+.registerPage .ant-form-item-required {
   color: white !important;
 }
-.ant-col  label{
+.loginPage .ant-col label,
+.registerPage .ant-col label {
   color: white !important;
 }
-.ant-input{
+.loginPage .ant-input,
+.registerPage .ant-input {
   background: transparent !important;
   color: white !important;
 }
-.ant-input::placeholder{
+.loginPage .ant-input::placeholder,
+.registerPage .ant-input::placeholder {
   color: white !important;
 }
 
-.ant-input-affix-wrapper{
+.loginPage .ant-input-affix-wrapper,
+.registerPage .ant-input-affix-wrapper {
   background: transparent !important;
 }
 
-.ant-input-suffix{
+.loginPage .ant-input-suffix,
+.registerPage .ant-input-suffix {
   color: white !important;
 }
