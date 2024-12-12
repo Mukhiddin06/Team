@@ -3,7 +3,7 @@ import { ParamsType } from "../types";
 import { getCategories } from "../api/categories";
 
 export const useGetCategoriesQuery = (params?: ParamsType) => {
-  return useQuery<ParamsType | Error>({
+  return useQuery({
     queryKey: ["categories"],
     queryFn: () => getCategories(params),
   });

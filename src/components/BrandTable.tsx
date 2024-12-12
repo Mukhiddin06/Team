@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Table } from "antd";
 import type { TableColumnsType } from "antd";
 import {
@@ -7,7 +7,7 @@ import {
   EllipsisOutlined,
 } from "@ant-design/icons";
 import { BrandsType } from "../types";
-import { useGetBrandsQuery } from "../hooks/useDashboard";
+import { useGetBrandsQuery } from "../hooks/useBrands";
 import { TableProps } from "antd/lib";
 
 const columns: TableColumnsType<BrandsType> = [
@@ -21,7 +21,7 @@ const columns: TableColumnsType<BrandsType> = [
   },
   {
     title: "Description",
-    dataIndex: "description"
+    dataIndex: "description",
   },
   {
     title: "Actions",
@@ -40,23 +40,30 @@ const columns: TableColumnsType<BrandsType> = [
         </div>
       );
     },
-    className: "flex items-end justify-center text-center" 
+    className: "flex items-end justify-center text-center",
   },
 ];
 
 const BrandTable: React.FC = () => {
   const [current, setCurrent] = useState<number | undefined>(1);
+  const [brands, setBrands] = useState<BrandsType[]>([]);
   const { data = [], isPending } = useGetBrandsQuery({
     page: current ? current : 1,
     limit: 5,
     search: "",
   });
 
-  const dataSource = data.map((item:any) => ({
-    ...item,
-    key: item.id,
-  }));
-  console.log(data)
+
+  useEffect(() => {
+    if(data){
+      setBrands(
+        data?.brands?.map((item: BrandsType) => ({
+          key: item.id,
+         ...item,
+        }))?? []
+      );
+    }
+  }, [isPending]);
 
   const onChange: TableProps<BrandsType>["onChange"] = (pagination) => {
     setCurrent(pagination.current);
@@ -66,8 +73,8 @@ const BrandTable: React.FC = () => {
     <Table<BrandsType>
       columns={columns}
       loading={isPending}
-      dataSource={dataSource}
-      pagination={{ total: 13, pageSize: 5, current: current }}
+      dataSource={brands}
+      pagination={{ total: data?.count, pageSize: 5, current: current }}
       onChange={onChange}
     />
   );

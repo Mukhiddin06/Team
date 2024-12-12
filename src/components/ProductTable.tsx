@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Table } from "antd";
 import type { TableColumnsType } from "antd";
 import {
@@ -7,7 +7,7 @@ import {
   EllipsisOutlined,
 } from "@ant-design/icons";
 import { ProductType } from "../types";
-import { useGetProductsQuery } from "../hooks/useDashboard";
+import { useGetProductsQuery } from "../hooks/useProducts";
 import { TableProps } from "antd/lib";
 
 const columns: TableColumnsType<ProductType> = [
@@ -40,17 +40,27 @@ const columns: TableColumnsType<ProductType> = [
         </div>
       );
     },
-    className: "flex items-end justify-center text-center" 
+    className: "flex items-end justify-center text-center",
   },
 ];
 
 const ProductTable: React.FC = () => {
+  const [products, setProducts] = useState<ProductType[]>([]);
   const [current, setCurrent] = useState<number | undefined>(1);
   const { data = [], isPending } = useGetProductsQuery({
     page: current ? current : 1,
     limit: 5,
     search: "",
   });
+
+  useEffect(() => {
+      setProducts(
+        data?.products?.map((item: ProductType) => ({
+          key: item.id,
+          ...item,
+        })) ?? []
+      );
+  }, [isPending]);
 
   const onChange: TableProps<ProductType>["onChange"] = (pagination) => {
     setCurrent(pagination.current);
@@ -60,8 +70,8 @@ const ProductTable: React.FC = () => {
     <Table<ProductType>
       columns={columns}
       loading={isPending}
-      dataSource={data.products}
-      pagination={{ total: data.count, pageSize: 5, current: current }}
+      dataSource={products}
+      pagination={{ total: data?.count, pageSize: 5, current: current }}
       onChange={onChange}
     />
   );

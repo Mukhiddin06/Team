@@ -3,9 +3,6 @@ import BrandTable from "../../components/BrandTable";
 
 
 const Brands = () => {
-
-
-
   return(
     <div>
       <BrandTable/>
