@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import { Button, Form, Input } from 'antd';
-import { MaskedInput } from 'antd-mask-input';
-import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
-import toast, { Toaster } from 'react-hot-toast';
-import { SignupType } from '../../types';
-import { Link, useNavigate } from 'react-router-dom';
-import { useRegisterMutation } from '../../hooks/useAuth';
-
+import React, { useState } from "react";
+import { Button, Form, Input } from "antd";
+import { MaskedInput } from "antd-mask-input";
+import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
+import toast, { Toaster } from "react-hot-toast";
+import { SignupType } from "../../types";
+import { Link, useNavigate } from "react-router-dom";
+import { useRegisterMutation } from "../../hooks/useAuth";
 
 const RegisterPage: React.FC = () => {
   const [form] = Form.useForm();
@@ -32,9 +31,8 @@ const RegisterPage: React.FC = () => {
     );
   };
 
-
   return (
-    <div className="flex items-center justify-center h-[100vh] bg-[#244BC5] relative">
+    <div className="flex items-center justify-center h-[100vh] bg-[#244BC5] relative registerPage">
       <Toaster position="top-right" reverseOrder={false} />
       <img
         className="absolute z-10 w-full h-full top-0"
@@ -43,7 +41,7 @@ const RegisterPage: React.FC = () => {
         width={"100%"}
         height={"100%"}
       />
-      <div className='max-w-[300px] z-50 w-full'>
+      <div className="max-w-[300px] z-50 w-full">
         <img
           className="w-[119px]  h-[97px] object-cover mx-auto mb-[50px]"
           src="/login-icon.svg"
@@ -52,7 +50,7 @@ const RegisterPage: React.FC = () => {
           height={97}
         />
         <Form
-          autoComplete='off'
+          autoComplete="off"
           layout="vertical"
           form={form}
           onFinish={handleSubmitRegister}
@@ -60,13 +58,15 @@ const RegisterPage: React.FC = () => {
           <Form.Item
             label="First Name"
             name="first_name"
-            rules={[{ required: true, message: "Enter First Name" }]}>
+            rules={[{ required: true, message: "Enter First Name" }]}
+          >
             <Input placeholder="Enter First Name" />
           </Form.Item>
           <Form.Item
             label="Last Name"
             name="last_name"
-            rules={[{ required: true, message: "Enter Last Name" }]}>
+            rules={[{ required: true, message: "Enter Last Name" }]}
+          >
             <Input placeholder="Enter Last Name" />
           </Form.Item>
           <Form.Item
@@ -78,7 +78,8 @@ const RegisterPage: React.FC = () => {
                 pattern: /^\+998 \d{2} \d{3} \d{2} \d{2}$/,
                 message: "Please enter a valid phone number!",
               },
-            ]}>
+            ]}
+          >
             <MaskedInput
               mask={"+998 00 000 00 00"}
               size="middle"
@@ -88,7 +89,8 @@ const RegisterPage: React.FC = () => {
           <Form.Item
             label="Email"
             name="email"
-            rules={[{ required: true, message: "Enter Email" }]}>
+            rules={[{ required: true, message: "Enter Email" }]}
+          >
             <Input placeholder="Enter Email" />
           </Form.Item>
           <Form.Item
@@ -100,7 +102,8 @@ const RegisterPage: React.FC = () => {
                 min: 6,
                 message: "Password must be at least 6 characters long",
               },
-            ]}>
+            ]}
+          >
             <Input
               placeholder="Enter Password"
               type={showPassword ? "text" : "password"}
@@ -129,10 +132,12 @@ const RegisterPage: React.FC = () => {
             </Button>
           </Form.Item>
         </Form>
-        <Link to={"/login"} className="block text-white text-end">Have an Account ?</Link>
+        <Link to={"/login"} className="block text-white text-end">
+          Have an Account ?
+        </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default RegisterPage
+export default RegisterPage;

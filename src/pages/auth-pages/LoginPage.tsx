@@ -35,7 +35,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-[100vh] bg-[#244BC5] relative">
+    <div className="flex items-center justify-center h-[100vh] bg-[#244BC5] relative loginPage">
       <Toaster position="top-right" reverseOrder={false} />
       <img
         className="absolute z-10 w-full h-full top-0"

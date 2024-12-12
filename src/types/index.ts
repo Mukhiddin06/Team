@@ -29,11 +29,11 @@ export interface UserDataTypes {
 }
 
 export interface BrandsType {
-  category_id?: number
-  description?: string
-  id?: number
-  image: string
-  name: string
+  category_id?: number;
+  description?: string;
+  id?: number;
+  image: string;
+  name: string;
 }
 export interface ProductType {
   brand_id?: number;
@@ -47,5 +47,14 @@ export interface ProductType {
 }
 export interface CategoryTypes {
   id?: number;
+  name?: string | undefined;
+}
+
+export interface AddCategoryType {
   name?: string;
+}
+
+export interface UpdateCategoryType {
+  id?: number;
+  data?: AddCategoryType;
 }
